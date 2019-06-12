@@ -62,7 +62,7 @@ public class LoginController {
                  if(uy.getPassword().equals(password)){
                     session.setAttribute("username", username);
                     InflowDao sd = new InflowDao();
-                    List<Inflow> transactions = sd.retrieve_transctions();
+                    List<Inflow> transactions = sd.unconfirmedin_transctions(username);
                     model.addObject("transactions", transactions);
                     model.setViewName("employee_transactions");
                     return model;

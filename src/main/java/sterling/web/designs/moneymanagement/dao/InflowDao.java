@@ -61,10 +61,24 @@ public class InflowDao {
     //unconfirmed transactions
      public List<Inflow> unconfirmed_transctions(){
         EntityManager em = getEntityManager();
-        String status = "";
+        String status = "UNCONFIRMED";
         try{
             Query trans = em.createNamedQuery("Inflow.findByStatus");
             trans.setParameter("status", status);
+            return trans.getResultList();
+        }catch(Exception ex){
+            ex.getLocalizedMessage();
+            return null;
+        }
+    } 
+     
+     //unconfirmed transactions
+     public List<Inflow> unconfirmedin_transctions(String enteredby){
+        EntityManager em = getEntityManager();
+        
+        try{
+            Query trans = em.createNamedQuery("Inflow.findByEnteredby");
+            trans.setParameter("enteredby", enteredby);
             return trans.getResultList();
         }catch(Exception ex){
             ex.getLocalizedMessage();

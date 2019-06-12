@@ -116,7 +116,8 @@
         <!-- ============================================================== -->
         <!-- Left Sidebar - style you can find in sidebar.scss  -->
         <!-- ============================================================== -->
-        <aside class="left-sidebar">
+                <!-- ============================================================== -->
+ <aside class="left-sidebar">
             <!-- Sidebar scroll-->
             <div class="scroll-sidebar">
                 <!-- User profile -->
@@ -133,10 +134,10 @@
                             <a class="has-arrow " href="${pageContext.request.contextPath}/outbyperson" aria-expanded="false"><i class="mdi mdi-bullseye"></i><span class="hide-menu">Requested Outflow</span></a>
                         </li>
                         <li>
-                            <a class="has-arrow " href="#" aria-expanded="false"><i class="mdi mdi-email"></i><span class="hide-menu">Pending Inflow</span></a>
+                            <a class="has-arrow " href="${pageContext.request.contextPath}/inbyperson" aria-expanded="false"><i class="mdi mdi-email"></i><span class="hide-menu">Pending Inflow</span></a>
                         </li>
                         <li>
-                            <a class="has-arrow" href="#" aria-expanded="false"><i class="mdi mdi-file"></i><span class="hide-menu">Confirmed Inflow</span></a>
+                            <a class="has-arrow" href="${pageContext.request.contextPath}/confirmedbyperson" aria-expanded="false"><i class="mdi mdi-file"></i><span class="hide-menu">Confirmed Inflow</span></a>
                         </li>
                     </ul>
                 </nav>
@@ -165,6 +166,7 @@
                    
                         <div class="card">
                             <div class="card-body">
+                                 <a href="${pageContext.request.contextPath}/showentry" style="float:right" class="btn pull-right hidden-sm-down btn-success">Add Transaction</a>
                                 <h4 class="card-title">All Transactions</h4>
                                 <h6 class="card-subtitle"></h6>
                                 <div class="table-responsive m-t-40">
