@@ -171,6 +171,7 @@
                    
                         <div class="card">
                             <div class="card-body">
+                                 <a href="${pageContext.request.contextPath}/showrequestform" style="float:right" class="btn pull-right hidden-sm-down btn-success">Request Outflow</a>
                                 <h4 class="card-title">Requested Outflow</h4>
                                 <h6 class="card-subtitle"></h6>
                                 <div class="table-responsive m-t-40">
@@ -184,6 +185,7 @@
                                                 <th>Date Requested</th>
                                                 <th>Status</th>
                                                 <th>Processed By</th>
+                                                
                                             </tr>
                                         </thead>
                                               <tbody>

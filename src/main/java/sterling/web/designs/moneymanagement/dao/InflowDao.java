@@ -86,6 +86,39 @@ public class InflowDao {
         }
     } 
      
+     //unconfirmed transactions
+     public List<Inflow> unconfirmedin_byperson_transctions(String enteredby){
+        EntityManager em = getEntityManager();
+        String status = "PENDING";
+        try{
+            Query trans = em.createNamedQuery("Inflow.findByInflow");
+            trans.setParameter("enteredby", enteredby);
+            trans.setParameter("status", status);
+            return trans.getResultList();
+        }catch(Exception ex){
+            ex.getLocalizedMessage();
+            return null;
+        }
+    } 
+     
+    //confirmed transactions
+     public List<Inflow> confirmedin_byperson_transctions(String enteredby){
+        EntityManager em = getEntityManager();
+        String status = "CONFIRMED";
+        try{
+            Query trans = em.createNamedQuery("Inflow.findByInflow");
+            trans.setParameter("enteredby", enteredby);
+            trans.setParameter("status", status);
+            return trans.getResultList();
+        }catch(Exception ex){
+            ex.getLocalizedMessage();
+            return null;
+        }
+    } 
+     
+    
+     
+     
     //confirmed transactions
      public List<Inflow> confirmed_transctions(){
         EntityManager em = getEntityManager();

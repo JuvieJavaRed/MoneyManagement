@@ -40,7 +40,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Outflow.findByDateResponse", query = "SELECT o FROM Outflow o WHERE o.dateResponse = :dateResponse")
     , @NamedQuery(name = "Outflow.findByRequestedby", query = "SELECT o FROM Outflow o WHERE o.requestedby = :requestedby")
     , @NamedQuery(name = "Outflow.findByApprovedby", query = "SELECT o FROM Outflow o WHERE o.approvedby = :approvedby")
-    , @NamedQuery(name = "Outflow.findByStatus", query = "SELECT o FROM Outflow o WHERE o.status = :status")})
+    , @NamedQuery(name = "Outflow.findByOutperson", query = "SELECT o FROM Outflow o WHERE o.status = :status")})
 public class Outflow implements Serializable {
 
     private static final long serialVersionUID = 1L;

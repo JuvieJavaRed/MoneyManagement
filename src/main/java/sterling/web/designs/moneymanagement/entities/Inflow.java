@@ -38,7 +38,9 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Inflow.findByInflowid", query = "SELECT i FROM Inflow i WHERE i.inflowid = :inflowid")
     , @NamedQuery(name = "Inflow.findByEnteredby", query = "SELECT i FROM Inflow i WHERE i.enteredby = :enteredby")
     , @NamedQuery(name = "Inflow.findByApprovedby", query = "SELECT i FROM Inflow i WHERE i.approvedby = :approvedby")
-    , @NamedQuery(name = "Inflow.findByStatus", query = "SELECT i FROM Inflow i WHERE i.status = :status")})
+    , @NamedQuery(name = "Inflow.findByStatus", query = "SELECT i FROM Inflow i WHERE i.status = :status")
+    , @NamedQuery(name = "Inflow.findByInflow", query = "SELECT i FROM Inflow i WHERE i.status = :status AND i.enteredby = :enteredby")
+})
 public class Inflow implements Serializable {
 
     private static final long serialVersionUID = 1L;

@@ -1,18 +1,12 @@
 <%-- 
-    Document   : employee_outflow
-    Created on : 26 May 2019, 2:11:16 PM
-    Author     : Rodney
---%>
-
-<%-- 
-    Document   : employee_transactions
-    Created on : 23 May 2019, 10:23:09 PM
+    Document   : confirmedinbyperson
+    Created on : 13 Jun 2019, 12:19:04 PM
     Author     : Rodney
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@page import="sterling.web.designs.moneymanagement.entities.Outflow"%>
+<%@page import="sterling.web.designs.moneymanagement.entities.Inflow"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.List"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -122,7 +116,8 @@
         <!-- ============================================================== -->
         <!-- Left Sidebar - style you can find in sidebar.scss  -->
         <!-- ============================================================== -->
-        <aside class="left-sidebar">
+                <!-- ============================================================== -->
+ <aside class="left-sidebar">
             <!-- Sidebar scroll-->
             <div class="scroll-sidebar">
                 <!-- User profile -->
@@ -133,16 +128,16 @@
                     <ul id="sidebarnav">
                         <li class="nav-small-cap">MENU</li>
                         <li>
-                            <a class="has-arrow" href="#" aria-expanded="false"><i class="mdi mdi-chart-bubble"></i><span class="hide-menu">All Transactions</span></a>  
+                            <a class="has-arrow" href="${pageContext.request.contextPath}/alltrans" aria-expanded="false"><i class="mdi mdi-chart-bubble"></i><span class="hide-menu">All Transactions</span></a>  
                         </li>
                         <li>
-                            <a class="has-arrow " href="#" aria-expanded="false"><i class="mdi mdi-bullseye"></i><span class="hide-menu">Requested Outflow</span></a>
+                            <a class="has-arrow " href="${pageContext.request.contextPath}/outbyperson" aria-expanded="false"><i class="mdi mdi-bullseye"></i><span class="hide-menu">Requested Outflow</span></a>
                         </li>
                         <li>
-                            <a class="has-arrow " href="#" aria-expanded="false"><i class="mdi mdi-email"></i><span class="hide-menu">Pending Inflow</span></a>
+                            <a class="has-arrow " href="${pageContext.request.contextPath}/inbyperson" aria-expanded="false"><i class="mdi mdi-email"></i><span class="hide-menu">Pending Inflow</span></a>
                         </li>
                         <li>
-                            <a class="has-arrow" href="#" aria-expanded="false"><i class="mdi mdi-file"></i><span class="hide-menu">Confirmed Inflow</span></a>
+                            <a class="has-arrow" href="${pageContext.request.contextPath}/confirmedbyperson" aria-expanded="false"><i class="mdi mdi-file"></i><span class="hide-menu">Confirmed Inflow</span></a>
                         </li>
                     </ul>
                 </nav>
@@ -171,8 +166,8 @@
                    
                         <div class="card">
                             <div class="card-body">
-                                 <a href="${pageContext.request.contextPath}/showrequestform" style="float:right" class="btn pull-right hidden-sm-down btn-success">Request Outflow</a>
-                                <h4 class="card-title">Requested Outflow</h4>
+                                
+                                <h4 class="card-title">Confirmed Transactions</h4>
                                 <h6 class="card-subtitle"></h6>
                                 <div class="table-responsive m-t-40">
                                     <table id="myTable" class="table table-bordered table-striped">
@@ -182,16 +177,16 @@
                                                 <th>Currency</th>
                                                 <th></th>
                                                 <th>Amount</th>
-                                                <th>Date Requested</th>
+                                                <th>Time</th>
+                                                <th>Date</th>
+                                                <th>Transaction ID</th>
                                                 <th>Status</th>
-                                                <th>Processed By</th>
-                                                
                                             </tr>
                                         </thead>
-                                              <tbody>
+                                                      <tbody>
                                                  <tr>
                                                     
-                                                   <c:forEach  var="trans" items="${outflowtrans}"  >
+                                                   <c:forEach  var="trans" items="${transactions}"  >
                                                        <td><c:out value="${trans.type}" /></td>
                                                        <td><c:out value="${trans.currency}" /></td>
                                                        <td>
@@ -202,8 +197,9 @@
                                                        </td>
                                                        <td><c:out value="${trans.amount}" /></td>
                                                        <td><c:out value="${trans.time}" /></td>
+                                                       <td><c:out value="${trans.date}" /></td>
+                                                       <td><c:out value="${trans.transid}" /></td>
                                                        <td><c:out value="${trans.status}" /></td>
-                                                       <td><c:out value="${trans.date_response}" /></td>
                                                        
                                                    </tr>
                                                    </c:forEach>
@@ -305,7 +301,7 @@
     <script src="resources/assets/plugins/jquery/jquery.min.js"></script>
     <!-- Bootstrap tether Core JavaScript -->
     <script src="resources/assets/plugins/bootstrap/js/popper.min.js"></script>
-    <script src="../assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <script src="resources/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
     <!-- slimscrollbar scrollbar JavaScript -->
     <script src="resources/js/jquery.slimscroll.js"></script>
     <!--Wave Effects -->
@@ -323,3 +319,4 @@
 </body>
 
 </html>
+

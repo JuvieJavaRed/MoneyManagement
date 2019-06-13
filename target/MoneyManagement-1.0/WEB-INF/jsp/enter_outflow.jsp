@@ -1,24 +1,11 @@
 <%-- 
-    Document   : employee_outflow
-    Created on : 26 May 2019, 2:11:16 PM
-    Author     : Rodney
---%>
-
-<%-- 
-    Document   : employee_transactions
-    Created on : 23 May 2019, 10:23:09 PM
+    Document   : enter_outflow
+    Created on : 13 Jun 2019, 1:46:41 PM
     Author     : Rodney
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@page import="sterling.web.designs.moneymanagement.entities.Outflow"%>
-<%@page import="java.util.ArrayList"%>
-<%@page import="java.util.List"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
-
 <html lang="en">
 
 <head>
@@ -37,6 +24,7 @@
     <link href="resources/css/style.css" rel="stylesheet">
     <!-- You can change the theme colors from here -->
     <link href="resources/css/colors/default-dark.css" id="theme" rel="stylesheet">
+    <script src="https://code.iconify.design/1/1.0.2/iconify.min.js"></script>
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -69,7 +57,7 @@
                     <a class="navbar-brand" href="index.html">
                         <!-- Logo icon -->
                         <b>
-                           Contitouch Systems
+                           Contitouch Money
                         </b>
                         <!--End Logo icon -->
                         <!-- Logo text -->
@@ -122,7 +110,7 @@
         <!-- ============================================================== -->
         <!-- Left Sidebar - style you can find in sidebar.scss  -->
         <!-- ============================================================== -->
-        <aside class="left-sidebar">
+ <aside class="left-sidebar">
             <!-- Sidebar scroll-->
             <div class="scroll-sidebar">
                 <!-- User profile -->
@@ -133,16 +121,16 @@
                     <ul id="sidebarnav">
                         <li class="nav-small-cap">MENU</li>
                         <li>
-                            <a class="has-arrow" href="#" aria-expanded="false"><i class="mdi mdi-chart-bubble"></i><span class="hide-menu">All Transactions</span></a>  
+                            <a class="has-arrow" href="${pageContext.request.contextPath}/alltrans" aria-expanded="false"><i class="mdi mdi-chart-bubble"></i><span class="hide-menu">All Transactions</span></a>  
                         </li>
                         <li>
-                            <a class="has-arrow " href="#" aria-expanded="false"><i class="mdi mdi-bullseye"></i><span class="hide-menu">Requested Outflow</span></a>
+                            <a class="has-arrow " href="${pageContext.request.contextPath}/outbyperson" aria-expanded="false"><i class="mdi mdi-bullseye"></i><span class="hide-menu">Requested Outflow</span></a>
                         </li>
                         <li>
-                            <a class="has-arrow " href="#" aria-expanded="false"><i class="mdi mdi-email"></i><span class="hide-menu">Pending Inflow</span></a>
+                            <a class="has-arrow " href="${pageContext.request.contextPath}/inbyperson" aria-expanded="false"><i class="mdi mdi-email"></i><span class="hide-menu">Pending Inflow</span></a>
                         </li>
                         <li>
-                            <a class="has-arrow" href="#" aria-expanded="false"><i class="mdi mdi-file"></i><span class="hide-menu">Confirmed Inflow</span></a>
+                            <a class="has-arrow" href="${pageContext.request.contextPath}/confirmedbyperson" aria-expanded="false"><i class="mdi mdi-file"></i><span class="hide-menu">Confirmed Inflow</span></a>
                         </li>
                     </ul>
                 </nav>
@@ -166,54 +154,59 @@
                 <!-- Bread crumb and right sidebar toggle -->
                 <!-- ============================================================== -->
                 <!-- Validation wizard -->
-                 <div class="row">
+                <div class="row" id="validation">
                     <div class="col-12">
-                   
-                        <div class="card">
+                        <div class="card wizard-content">
                             <div class="card-body">
-                                 <a href="${pageContext.request.contextPath}/showrequestform" style="float:right" class="btn pull-right hidden-sm-down btn-success">Request Outflow</a>
-                                <h4 class="card-title">Requested Outflow</h4>
-                                <h6 class="card-subtitle"></h6>
-                                <div class="table-responsive m-t-40">
-                                    <table id="myTable" class="table table-bordered table-striped">
-                                        <thead>
-                                            <tr>
-                                                <th>Transaction Type</th>
-                                                <th>Currency</th>
-                                                <th></th>
-                                                <th>Amount</th>
-                                                <th>Date Requested</th>
-                                                <th>Status</th>
-                                                <th>Processed By</th>
-                                                
-                                            </tr>
-                                        </thead>
-                                              <tbody>
-                                                 <tr>
-                                                    
-                                                   <c:forEach  var="trans" items="${outflowtrans}"  >
-                                                       <td><c:out value="${trans.type}" /></td>
-                                                       <td><c:out value="${trans.currency}" /></td>
-                                                       <td>
-                                                        <button type="submit" class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-option-horizontal" aria-hidden="true"></span></button>
-                                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                            <a class="dropdown-item" href="${pageContext.request.contextPath}/viewTransaction?id=${trans.transid}" >View</a> <a class="dropdown-item" href="${pageContext.request.contextPath}/editTransaction?id=${trans.transid}" >Edit</a>  <a class="dropdown-item" href="${pageContext.request.contextPath}/archiveTransaction?id=${trans.transid}">Archive</a>
-                                                        </div>
-                                                       </td>
-                                                       <td><c:out value="${trans.amount}" /></td>
-                                                       <td><c:out value="${trans.time}" /></td>
-                                                       <td><c:out value="${trans.status}" /></td>
-                                                       <td><c:out value="${trans.date_response}" /></td>
-                                                       
-                                                   </tr>
-                                                   </c:forEach>
-                                                  
-                                               </tbody>
-                                    </table>
-                                </div>
+                                <h4 class="card-title">Request Outflow</h4>
+                                
+                                <form action="${pageContext.request.contextPath}/entertrans"  class="validation-wizard wizard-circle">
+                                    <!-- Step 1 -->
+                                 
+                                    <section>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="wfirstName2"> Transaction Type : <span class="danger">*</span> </label>
+                                                    <select class="form-control required" id="wlastName2" name="type">
+                                                        <option value="">Select Transaction Type</option>
+                                                        <option value="Cash">Cash</option>
+                                                        <option value="Card">Card</option>
+                                                        <option value="Online">Online</option>
+                                                    </select> </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="wlastName2"> Currency : <span class="danger">*</span> </label>
+                                                    <select class="form-control required" id="wlastName2" name="currency">
+                                                        <option value="">Select Currency Type</option>
+                                                        <option value="USD">USD</option>
+                                                        <option value="ZWL">ZWL</option>
+                                                        <option value="ZAR">ZAR</option>
+                                                    </select>  </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="wemailAddress2"> Amount : <span class="danger">*</span> </label>
+                                                    <input type="number" class="form-control required" id="wemailAddress2" name="amount"> </div>
+                                            </div>
+					<div class="col-md-6">
+                                                <div class="form-group">
+                                                   <label for="wemailAddress2"> Reason : <span class="danger">*</span> </label>
+                                                    <input type="date" class="form-control required" id="wemailAddress2" name="designation"> 
+                                            </div>
+                                        </div>
+                                        </div>
+                                    
+                                    </section>
+                                    <!-- Step 2 -->
+                                    <button type="submit" class="btn pull-right hidden-sm-down btn-success"><i class="mdi mdi-plus-circle"></i> Add Transaction</button>
+                                    
+                                </form>
                             </div>
                         </div>
-                        
                     </div>
                 </div>
                 
@@ -305,7 +298,7 @@
     <script src="resources/assets/plugins/jquery/jquery.min.js"></script>
     <!-- Bootstrap tether Core JavaScript -->
     <script src="resources/assets/plugins/bootstrap/js/popper.min.js"></script>
-    <script src="../assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <script src="resources/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
     <!-- slimscrollbar scrollbar JavaScript -->
     <script src="resources/js/jquery.slimscroll.js"></script>
     <!--Wave Effects -->
@@ -323,3 +316,4 @@
 </body>
 
 </html>
+
