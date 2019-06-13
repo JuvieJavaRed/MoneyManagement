@@ -62,28 +62,24 @@ public class InflowController {
     
     //enter a transaction
     @RequestMapping(value = "/entertrans", method = RequestMethod.GET)
-    public ModelAndView send_alltrans(ModelAndView model, HttpServletRequest request) throws IOException{
+    public ModelAndView send_alltrans(ModelAndView model, HttpServletRequest request) throws IOException, ParseException{
         HttpSession s = request.getSession();
         HttpSession session = request.getSession();
         String username = (String) s.getAttribute("username");
         session.setAttribute("username", username);
         Random rand = new Random();
-        Date date1 = null;
+       
         Inflow rdr = new Inflow();
         InflowDao rdc = new InflowDao();
         String type = request.getParameter("type");
         String currency = request.getParameter("currency");
         int amount = parseInt(request.getParameter("amount"));
         String date = request.getParameter("date");
-        String sDate1=date;  
-        try {
-           date1=new SimpleDateFormat("dd/MM/yyyy").parse(sDate1);
-        } catch (ParseException ex) {
-            Logger.getLogger(InflowController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        String sDate1=date; 
+        Date date1=new SimpleDateFormat("dd/MM/yyyy").parse(sDate1);
         String inflowid = request.getParameter("inflowid");
         String enteredby = username;
-        String status = "UNCONFIRMED";
+        String status = "PENDING";
         int transid = rand.nextInt(50);
         String str1 = Integer.toString(transid);
         rdr.setAmount(amount);
