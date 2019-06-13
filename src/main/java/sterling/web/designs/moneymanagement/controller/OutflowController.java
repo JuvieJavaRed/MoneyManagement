@@ -91,16 +91,25 @@ public class OutflowController {
 //        return model;
 //    }
 //    
-//    //report filter method
-//    @RequestMapping(value = "/filterouttrans", method = RequestMethod.GET)
-//    public ModelAndView filter_alltrans(ModelAndView model, HttpServletRequest request) throws IOException{
-//        HttpSession s = request.getSession();
-//        HttpSession session = request.getSession();
-//        String username = (String) s.getAttribute("username");
-//        session.setAttribute("username", username);
-//        return model;
-//    }
-//    
+    //report filter method
+    @RequestMapping(value = "/requestouttrans", method = RequestMethod.GET)
+    public ModelAndView request_outflow(ModelAndView model, HttpServletRequest request) throws IOException{
+        HttpSession s = request.getSession();
+        HttpSession session = request.getSession();
+        String username = (String) s.getAttribute("username");
+        session.setAttribute("username", username);
+        OutflowDao ode = new OutflowDao();
+        Outflow edr = new Outflow();
+        String type = request.getParameter("type");
+        String currency = request.getParameter("currency");
+        String amount = request.getParameter("amount");
+        String designation = request.getParameter("designation");
+        String status = "PENDING";
+        String requestedby = username;
+        
+        return model;
+    }
+    
     //create outflow
     @RequestMapping(value = "/showrequestform", method = RequestMethod.GET)
     public ModelAndView open_formtrans(ModelAndView model, HttpServletRequest request) throws IOException{

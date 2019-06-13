@@ -160,7 +160,7 @@
                             <div class="card-body">
                                 <h4 class="card-title">Request Outflow</h4>
                                 
-                                <form action="${pageContext.request.contextPath}/entertrans"  class="validation-wizard wizard-circle">
+                                <form action="${pageContext.request.contextPath}/requestouttrans"  class="validation-wizard wizard-circle">
                                     <!-- Step 1 -->
                                  
                                     <section>
